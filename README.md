@@ -3,7 +3,8 @@ Backend api-application in Java<br>
 Java Open-JDK 11<br>
 Maven 3.6.3 <br>
 SpringBoot Project 2.6.1<br>
-####Dependências: <br>
+
+### Dependências: <br>
 Lombok (necessário plugin de acordo com sua IDE)<br>
 Data JPA (Persistence) <br>
 Starter Web<br>
@@ -11,8 +12,8 @@ H2 Database (utilizado apenas para testes)<br>
 PostgreSQL Driver (banco principal)
 
 
-#Database
-###PostgreSQL<br>
+# Database<br>
+### PostgreSQL<br>
 
 Utilizei um container com docker, deixarei o comando logo abaixo, mas se prefirir pode usar o standalone.
 
@@ -25,9 +26,9 @@ localhost:5432/financas-db
 username : postgres
 password: 123
 ```
-###Script utilizado para criar as tabelas no banco:<br>
+### Script utilizado para criar as tabelas no banco:<br>
 
-####Tabela Usuário:
+#### Tabela Usuário:
 ```
 create table usuario (
 id bigserial NOT NULL PRIMARY KEY ,
@@ -38,7 +39,7 @@ data_cadastro date DEFAULT now()
 );
 ```
 
-####Tabela Lançamento: <br>
+#### Tabela Lançamento: <br>
 ```
 create table lancamento(
 id bigserial NOT NULL PRIMARY KEY ,
