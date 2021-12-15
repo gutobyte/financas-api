@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "usuario")
 @Data
 @Builder
+@AllArgsConstructor
 public class Usuario {
 
 
@@ -25,6 +26,8 @@ public class Usuario {
 
     @Column(name = "senha", length = 20)
     private String senha;
+
+    public Usuario(){};
 
 
 }
