@@ -6,11 +6,15 @@ import com.gustavo.financasapi.dto.UsuarioDTO;
 import com.gustavo.financasapi.exceptions.ErroAutenticacao;
 import com.gustavo.financasapi.exceptions.RegraNegocioException;
 import com.gustavo.financasapi.model.entity.Usuario;
+import com.gustavo.financasapi.service.LancamentoService;
 import com.gustavo.financasapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ public class UsuarioController {
 
 
     private final UsuarioService usuarioService;
+    private final LancamentoService lancamentoService;
 
 
 /*    @PostMapping
@@ -51,6 +56,18 @@ public class UsuarioController {
         }catch (RegraNegocioException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("{id}/saldo")
+    public ResponseEntity obterSaudo(@PathVariable("id") Long id){
+
+        Optional<Usuario> usuario = usuarioService.obterPorId(id);
+        if(!usuario.isPresent()){
+            new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        BigDecimal saldo = lancamentoService.obterSaldoPorUsuario(id);
+        return ResponseEntity.ok(saldo);
     }
 
 

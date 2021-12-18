@@ -2,7 +2,9 @@ package com.gustavo.financasapi.model.entity;
 
 import com.gustavo.financasapi.model.entity.enums.StatusLancamento;
 import com.gustavo.financasapi.model.entity.enums.TipoLancamento;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,13 +12,15 @@ import java.time.LocalDate;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "lancamento")
 public class Lancamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "descricao", length = 100)
@@ -36,7 +40,6 @@ public class Lancamento {
     private Usuario usuario;
 
     @Column(name = "data_cadastro")
-    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate dataCadastro;
 
     @Column(name = "tipo")
@@ -46,5 +49,11 @@ public class Lancamento {
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private StatusLancamento status;
+
+
+    @PrePersist
+    public void setarData(){
+        setDataCadastro(LocalDate.now());
+    }
 
 }

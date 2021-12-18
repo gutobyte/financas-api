@@ -3,6 +3,8 @@ package com.gustavo.financasapi.service;
 
 import com.gustavo.financasapi.model.entity.Usuario;
 
+import java.util.Optional;
+
 
 public interface UsuarioService {
 
@@ -11,4 +13,6 @@ public interface UsuarioService {
     Usuario salvarUsuario(Usuario usuario);
 
     void validarEmail(String email);
+
+    Optional<Usuario> obterPorId(Long id);
 }
